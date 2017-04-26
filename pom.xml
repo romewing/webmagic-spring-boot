@@ -9,6 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>webmagic-spring-boot-autoconfigure</module>
+        <module>webmagic-spring-boot-starter</module>
+        <module>webmagic-spring-boot-samples</module>
     </modules>
     <packaging>pom</packaging>
 
