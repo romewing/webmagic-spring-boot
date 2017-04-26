@@ -57,4 +57,32 @@ public class WebmagicProperties {
     public boolean isStart() {
         return start;
     }
+
+    public void setUrls(String[] urls) {
+        this.urls = urls;
+    }
+
+    public void setStart(boolean start) {
+        this.start = start;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public void setThreadNum(int threadNum) {
+        this.threadNum = threadNum;
+    }
+
+    public void setPageProcessor(Class<? extends PageProcessor> pageProcessor) {
+        this.pageProcessor = pageProcessor;
+    }
+
+    public void setPipelines(List<Class<? extends Pipeline>> pipelines) {
+        this.pipelines = pipelines;
+    }
+
+    public void setScheduler(Class<? extends Scheduler> scheduler) {
+        this.scheduler = scheduler;
+    }
 }
