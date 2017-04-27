@@ -13,7 +13,12 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.processor.SimplePageProcessor;
 
 /**
  * Created by gh on 2017/4/26.
@@ -21,6 +26,7 @@ import us.codecraft.webmagic.Spider;
 @Configuration
 @ConditionalOnClass(Spider.class)
 @EnableConfigurationProperties(WebmagicProperties.class)
+@EnableScheduling
 public class WebmagicAutoConfiguration {
 
     public static final Logger logger = LoggerFactory.getLogger(WebmagicAutoConfiguration.class);
@@ -41,13 +47,15 @@ public class WebmagicAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(Spider.class)
     @ConditionalOnProperty(name = "webmagic.pageProcessor")
-    public Spider spider() {
+    public Spider spider(PageProcessor pageProcessor) {
         Spider spider = Spider.create(BeanUtils.instantiate(properties.getPageProcessor())).addUrl(properties.getUrls()).setUUID(properties.getUuid()).thread(properties.getThreadNum());
         if(properties.isStart()) {
             spider.start();
         }
         return spider;
     }
+
+
 
 
 }
