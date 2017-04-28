@@ -44,15 +44,22 @@ public class WebmagicAutoConfiguration {
         this.resourceLoader = resourceLoader;
     }
 
-    @Bean
+   /* @Bean
     @ConditionalOnMissingBean(Spider.class)
     @ConditionalOnProperty(name = "webmagic.pageProcessor")
     public Spider spider(PageProcessor pageProcessor) {
-        Spider spider = Spider.create(BeanUtils.instantiate(properties.getPageProcessor())).addUrl(properties.getUrls()).setUUID(properties.getUuid()).thread(properties.getThreadNum());
+       // Spider spider = Spider.create(pageProcessor).addUrl(properties.getUrls()).setUUID(properties.getUuid()).thread(properties.getThreadNum());
         if(properties.isStart()) {
             spider.start();
         }
         return spider;
+    }*/
+
+    @Bean
+    @ConditionalOnMissingBean
+    public PageProcessor pageProcessor() {
+        PageProcessor pageProcessor = new SimplePageProcessor("","");
+        return pageProcessor;
     }
 
 

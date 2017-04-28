@@ -1,0 +1,10 @@
+webmagic:
+  spider:
+    sczbbx:
+      uuid: test1
+      threadNum: 1
+      processor:
+      pipeline:
+      url:
+      cron:
+      fixed:
