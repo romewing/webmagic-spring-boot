@@ -21,8 +21,11 @@ public class WebmagicProperties {
 
     private Map<String, ? extends Pipeline> pipelines = new HashMap<>();
 
+    public Map<String, ? extends Pipeline> getPipelines() {
+        return pipelines;
+    }
 
-
-
-
+    public void setPipelines(Map<String, ? extends Pipeline> pipelines) {
+        this.pipelines = pipelines;
+    }
 }

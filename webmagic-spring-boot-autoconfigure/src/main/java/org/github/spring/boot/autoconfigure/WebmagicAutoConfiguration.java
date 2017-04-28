@@ -5,6 +5,7 @@ import org.aopalliance.intercept.Interceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -19,6 +20,8 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.processor.SimplePageProcessor;
+
+import java.util.List;
 
 /**
  * Created by gh on 2017/4/26.
@@ -37,11 +40,14 @@ public class WebmagicAutoConfiguration {
 
     private final WebmagicProperties properties;
 
+    private final ListableBeanFactory beanFactory;
+
     public WebmagicAutoConfiguration(WebmagicProperties properties, ObjectProvider<Interceptor[]> interceptorsProvider,
-                                     ResourceLoader resourceLoader)  {
+                                     ResourceLoader resourceLoader, ListableBeanFactory beanFactory)  {
         this.properties = properties;
         this.interceptors = interceptorsProvider.getIfAvailable();
         this.resourceLoader = resourceLoader;
+        this.beanFactory = beanFactory;
     }
 
    /* @Bean
