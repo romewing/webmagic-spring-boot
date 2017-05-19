@@ -15,7 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by gh on 2017/4/26.
+ * Configuration properties for WebMagic
+ *
+ * @author ZHANG Yi
  */
 
 @ConfigurationProperties(prefix = "webmagic")

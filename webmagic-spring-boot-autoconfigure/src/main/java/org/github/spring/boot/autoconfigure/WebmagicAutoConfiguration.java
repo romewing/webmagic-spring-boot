@@ -26,8 +26,11 @@ import us.codecraft.webmagic.scheduler.Scheduler;
 
 import java.util.List;
 
+
 /**
- * Created by gh on 2017/4/26.
+ * {@link org.springframework.boot.autoconfigure.EnableAutoConfiguration Auto-configuration} for WebMagic}.
+ *
+ * @author ZHANG Yi
  */
 @Configuration
 @ConditionalOnClass(Spider.class)
