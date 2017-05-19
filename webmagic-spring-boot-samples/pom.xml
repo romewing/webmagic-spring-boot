@@ -11,6 +11,17 @@
 
     <groupId>org.github</groupId>
     <artifactId>webmagic-spring-boot-samples</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.github</groupId>
+            <artifactId>webmagic-spring-boot-starter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>us.codecraft</groupId>
+            <artifactId>webmagic-core</artifactId>
+        </dependency>
+    </dependencies>
 
 
 </project>

@@ -1,11 +1,18 @@
 package org.github.spring.boot.autoconfigure;
 
+import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
+import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.Scheduler;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by gh on 2017/4/26.
@@ -14,75 +21,76 @@ import java.util.List;
 @ConfigurationProperties(prefix = "webmagic")
 public class WebmagicProperties {
 
-    private String[] urls;
 
-    private boolean start;
+    private String url;
 
-    private String uuid;
+    private String cron;
 
-    private int threadNum;
+    private int fixedRate;
+
+    private int fixedDelay;
 
     private Class<? extends PageProcessor> pageProcessor;
 
-    private List<Class<? extends Pipeline>> pipelines;
+    private List<Class<? extends Pipeline>> pipeLines;
+
 
     private Class<? extends Scheduler> scheduler;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getCron() {
+        return cron;
+    }
+
+    public int getFixedRate() {
+        return fixedRate;
+    }
+
+    public void setFixedRate(int fixedRate) {
+        this.fixedRate = fixedRate;
+    }
+
+    public void setCron(String cron) {
+        this.cron = cron;
+    }
 
 
     public Class<? extends PageProcessor> getPageProcessor() {
         return pageProcessor;
     }
 
+    public List<Class<? extends Pipeline>> getPipeLines() {
+        return pipeLines;
+    }
+
+    public void setPipeLines(List<Class<? extends Pipeline>> pipeLines) {
+        this.pipeLines = pipeLines;
+    }
+
     public Class<? extends Scheduler> getScheduler() {
         return scheduler;
     }
 
-
-    public List<Class<? extends Pipeline>> getPipelines() {
-        return pipelines;
-    }
-
-    public String[] getUrls() {
-        return urls;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public int getThreadNum() {
-        return threadNum;
-    }
-
-    public boolean isStart() {
-        return start;
-    }
-
-    public void setUrls(String[] urls) {
-        this.urls = urls;
-    }
-
-    public void setStart(boolean start) {
-        this.start = start;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public void setThreadNum(int threadNum) {
-        this.threadNum = threadNum;
+    public void setScheduler(Class<? extends Scheduler> scheduler) {
+        this.scheduler = scheduler;
     }
 
     public void setPageProcessor(Class<? extends PageProcessor> pageProcessor) {
         this.pageProcessor = pageProcessor;
     }
 
-    public void setPipelines(List<Class<? extends Pipeline>> pipelines) {
-        this.pipelines = pipelines;
+    public int getFixedDelay() {
+        return fixedDelay;
     }
 
-    public void setScheduler(Class<? extends Scheduler> scheduler) {
-        this.scheduler = scheduler;
+    public void setFixedDelay(int fixedDelay) {
+        this.fixedDelay = fixedDelay;
     }
 }
