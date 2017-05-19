@@ -1,1 +1,1 @@
-# webmagic-spring-boot
+# WebMagic integration with Spring Boot
