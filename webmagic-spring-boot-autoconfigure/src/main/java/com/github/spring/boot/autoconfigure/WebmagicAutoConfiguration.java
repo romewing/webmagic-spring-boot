@@ -1,5 +1,5 @@
 
-package org.github.spring.boot.autoconfigure;
+package com.github.spring.boot.autoconfigure;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;

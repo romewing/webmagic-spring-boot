@@ -1,4 +1,4 @@
-package org.github.spring.boot.autoconfigure;
+package com.github.spring.boot.autoconfigure;
 
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
