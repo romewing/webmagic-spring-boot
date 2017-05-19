@@ -28,6 +28,8 @@ public class WebmagicProperties {
 
     private int fixedRate;
 
+    private int fixedDelay;
+
     private Class<? extends PageProcessor> pageProcessor;
 
     private List<Class<? extends Pipeline>> pipeLines;
@@ -82,5 +84,13 @@ public class WebmagicProperties {
 
     public void setPageProcessor(Class<? extends PageProcessor> pageProcessor) {
         this.pageProcessor = pageProcessor;
+    }
+
+    public int getFixedDelay() {
+        return fixedDelay;
+    }
+
+    public void setFixedDelay(int fixedDelay) {
+        this.fixedDelay = fixedDelay;
     }
 }

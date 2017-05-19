@@ -79,6 +79,10 @@ public class WebmagicAutoConfiguration{
         if(fixedRate > 0) {
             taskScheduler.scheduleAtFixedRate(spider, fixedRate);
         }
+        int fixedDelay = properties.getFixedDelay();
+        if(fixedDelay > 0) {
+            taskScheduler.scheduleWithFixedDelay(spider, fixedDelay);
+        }
         return spider;
     }
 
