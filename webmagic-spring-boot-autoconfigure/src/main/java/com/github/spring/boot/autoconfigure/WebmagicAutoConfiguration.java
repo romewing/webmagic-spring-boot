@@ -91,8 +91,8 @@ public class WebmagicAutoConfiguration{
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = "webmagic.spider", name = "auto", havingValue = "true", matchIfMissing = true)
-   public SpiderCommandLineRunner spiderCommandLineRunner() {
-        SpiderCommandLineRunner commandLineRunner = new SpiderCommandLineRunner();
+   public WebmagicCommandLineRunner webmagicCommandLineRunner() {
+        WebmagicCommandLineRunner commandLineRunner = new WebmagicCommandLineRunner();
         return commandLineRunner;
    }
 
