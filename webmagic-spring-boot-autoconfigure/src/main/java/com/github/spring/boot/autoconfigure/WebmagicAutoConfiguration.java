@@ -11,20 +11,24 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.processor.SimplePageProcessor;
+import us.codecraft.webmagic.processor.example.GithubRepoPageProcessor;
 import us.codecraft.webmagic.scheduler.Scheduler;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -52,17 +56,10 @@ public class WebmagicAutoConfiguration{
 
 
     @Bean
-    @ConditionalOnMissingBean
-    @ConditionalOnProperty(value = "webmagic.spider.urls")
-    public PageProcessor pageProcessor() {
-        return new SimplePageProcessor(properties.getUrls()[0], "*");
-    }
-
-    @Bean
-    @ConditionalOnBean(PageProcessor.class)
+    @ConditionalOnProperty(prefix = "webmagic.spider", value = {"page-processor","urls"})
     public Spider spider() {
-        PageProcessor pageProcessor = beanFactory.getBean(PageProcessor.class);
-        Spider spider = Spider.create(pageProcessor).addUrl(properties.getUrls());
+        Class<? extends PageProcessor> pageProcessor = properties.getPageProcessor();
+        Spider spider = Spider.create(BeanUtils.instantiate(pageProcessor)).addUrl(properties.getUrls());
         List<Class<? extends Pipeline>> pipeLines = properties.getPipeLines();
         if (pipeLines != null) {
             for (Class<? extends Pipeline> pipeline : pipeLines) {
@@ -73,6 +70,7 @@ public class WebmagicAutoConfiguration{
         if (scheduler != null) {
             spider.setScheduler(BeanUtils.instantiateClass(scheduler));
         }
+        /*
         TaskScheduler taskScheduler = beanFactory.getBean(TaskScheduler.class);
         String cron = properties.getCron();
         if (StringUtils.hasText(cron)) {
@@ -86,8 +84,17 @@ public class WebmagicAutoConfiguration{
         if(fixedDelay > 0) {
             taskScheduler.scheduleWithFixedDelay(spider, fixedDelay);
         }
+        */
         return spider;
     }
+
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(prefix = "webmagic.spider", name = "auto", havingValue = "true", matchIfMissing = true)
+   public SpiderCommandLineRunner spiderCommandLineRunner() {
+        SpiderCommandLineRunner commandLineRunner = new SpiderCommandLineRunner();
+        return commandLineRunner;
+   }
 
 
 }

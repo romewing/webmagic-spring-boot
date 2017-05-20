@@ -3,10 +3,12 @@ package com.github.spring.boot.autoconfigure;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
+import org.springframework.core.annotation.Order;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.processor.SimplePageProcessor;
 import us.codecraft.webmagic.scheduler.Scheduler;
 
 import java.util.ArrayList;
@@ -23,6 +25,8 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "webmagic.spider")
 public class WebmagicProperties {
 
+
+    private boolean auto;
 
     private String[] urls;
 
@@ -94,5 +98,13 @@ public class WebmagicProperties {
 
     public void setUrls(String[] urls) {
         this.urls = urls;
+    }
+
+    public boolean isAuto() {
+        return auto;
+    }
+
+    public void setAuto(boolean auto) {
+        this.auto = auto;
     }
 }

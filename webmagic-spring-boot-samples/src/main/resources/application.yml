@@ -1,0 +1,8 @@
+webmagic:
+  spider:
+    page-processor: us.codecraft.webmagic.processor.example.GithubRepoPageProcessor
+    urls: http://www.github.com
+    fixed-delay: 120000
+spring:
+  pid:
+    file: application.pid
