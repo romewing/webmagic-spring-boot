@@ -4,13 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>webmagic-spring-boot</artifactId>
-        <groupId>com.github</groupId>
+        <groupId>com.github.romewing</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <description></description>
+    <description>WebMagic spring boot starter</description>
 
-    <groupId>com.github</groupId>
     <artifactId>webmagic-spring-boot-starter</artifactId>
     <name>webmagic-spring-boot-starter</name>
     <dependencies>
@@ -19,7 +18,7 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github</groupId>
+            <groupId>com.github.romewing</groupId>
             <artifactId>webmagic-spring-boot-autoconfigure</artifactId>
             <version>1.0</version>
         </dependency>
