@@ -20,11 +20,11 @@ import java.util.Map;
  * @author ZHANG Yi
  */
 
-@ConfigurationProperties(prefix = "webmagic")
+@ConfigurationProperties(prefix = "webmagic.spider")
 public class WebmagicProperties {
 
 
-    private String url;
+    private String[] urls;
 
     private String cron;
 
@@ -38,14 +38,6 @@ public class WebmagicProperties {
 
 
     private Class<? extends Scheduler> scheduler;
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public String getCron() {
         return cron;
@@ -94,5 +86,13 @@ public class WebmagicProperties {
 
     public void setFixedDelay(int fixedDelay) {
         this.fixedDelay = fixedDelay;
+    }
+
+    public String[] getUrls() {
+        return urls;
+    }
+
+    public void setUrls(String[] urls) {
+        this.urls = urls;
     }
 }

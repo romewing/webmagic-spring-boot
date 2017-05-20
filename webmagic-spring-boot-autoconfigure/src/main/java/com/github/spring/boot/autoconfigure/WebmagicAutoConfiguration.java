@@ -53,16 +53,16 @@ public class WebmagicAutoConfiguration{
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(value = "webmagic.url")
+    @ConditionalOnProperty(value = "webmagic.spider.urls")
     public PageProcessor pageProcessor() {
-        return new SimplePageProcessor(properties.getUrl(), "*");
+        return new SimplePageProcessor(properties.getUrls()[0], "*");
     }
 
     @Bean
     @ConditionalOnBean(PageProcessor.class)
     public Spider spider() {
         PageProcessor pageProcessor = beanFactory.getBean(PageProcessor.class);
-        Spider spider = Spider.create(pageProcessor);
+        Spider spider = Spider.create(pageProcessor).addUrl(properties.getUrls());
         List<Class<? extends Pipeline>> pipeLines = properties.getPipeLines();
         if (pipeLines != null) {
             for (Class<? extends Pipeline> pipeline : pipeLines) {
