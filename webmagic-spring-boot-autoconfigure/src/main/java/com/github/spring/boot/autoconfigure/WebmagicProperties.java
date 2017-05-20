@@ -36,13 +36,6 @@ public class WebmagicProperties {
 
     private int fixedDelay;
 
-    private Class<? extends PageProcessor> pageProcessor;
-
-    private List<Class<? extends Pipeline>> pipeLines;
-
-
-    private Class<? extends Scheduler> scheduler;
-
     public String getCron() {
         return cron;
     }
@@ -57,31 +50,6 @@ public class WebmagicProperties {
 
     public void setCron(String cron) {
         this.cron = cron;
-    }
-
-
-    public Class<? extends PageProcessor> getPageProcessor() {
-        return pageProcessor;
-    }
-
-    public List<Class<? extends Pipeline>> getPipeLines() {
-        return pipeLines;
-    }
-
-    public void setPipeLines(List<Class<? extends Pipeline>> pipeLines) {
-        this.pipeLines = pipeLines;
-    }
-
-    public Class<? extends Scheduler> getScheduler() {
-        return scheduler;
-    }
-
-    public void setScheduler(Class<? extends Scheduler> scheduler) {
-        this.scheduler = scheduler;
-    }
-
-    public void setPageProcessor(Class<? extends PageProcessor> pageProcessor) {
-        this.pageProcessor = pageProcessor;
     }
 
     public int getFixedDelay() {
