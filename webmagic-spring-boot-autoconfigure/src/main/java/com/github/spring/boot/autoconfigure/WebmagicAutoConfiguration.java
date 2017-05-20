@@ -56,39 +56,22 @@ public class WebmagicAutoConfiguration{
 
 
     @Bean
-    @ConditionalOnProperty(prefix = "webmagic.spider", value = {"page-processor","urls"})
+    @ConditionalOnProperty(prefix = "webmagic.spider", value = {"urls"})
+    @ConditionalOnBean(value = {PageProcessor.class})
     public Spider spider() {
-        Class<? extends PageProcessor> pageProcessor = properties.getPageProcessor();
-        Spider spider = Spider.create(BeanUtils.instantiate(pageProcessor)).addUrl(properties.getUrls());
-        List<Class<? extends Pipeline>> pipeLines = properties.getPipeLines();
-        if (pipeLines != null) {
-            for (Class<? extends Pipeline> pipeline : pipeLines) {
-                spider.addPipeline(BeanUtils.instantiate(pipeline));
-            }
+        Spider spider = Spider.create(beanFactory.getBean(PageProcessor.class)).addUrl(properties.getUrls());
+        if(beanFactory.getBeanNamesForType(Scheduler.class).length >0){
+            spider.setScheduler(beanFactory.getBean(Scheduler.class));
         }
-        Class<? extends Scheduler> scheduler = properties.getScheduler();
-        if (scheduler != null) {
-            spider.setScheduler(BeanUtils.instantiateClass(scheduler));
+        String[] pipelines = beanFactory.getBeanNamesForType(Pipeline.class);
+        for(String pipeline : pipelines) {
+            spider.addPipeline(beanFactory.getBean(pipeline, Pipeline.class));
         }
-        /*
-        TaskScheduler taskScheduler = beanFactory.getBean(TaskScheduler.class);
-        String cron = properties.getCron();
-        if (StringUtils.hasText(cron)) {
-            taskScheduler.schedule(spider, new CronTrigger(properties.getCron()));
-        }
-        int fixedRate = properties.getFixedRate();
-        if(fixedRate > 0) {
-            taskScheduler.scheduleAtFixedRate(spider, fixedRate);
-        }
-        int fixedDelay = properties.getFixedDelay();
-        if(fixedDelay > 0) {
-            taskScheduler.scheduleWithFixedDelay(spider, fixedDelay);
-        }
-        */
         return spider;
     }
 
     @Bean
+    @ConditionalOnBean(Spider.class)
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = "webmagic.spider", name = "auto", havingValue = "true", matchIfMissing = true)
    public WebmagicCommandLineRunner webmagicCommandLineRunner() {
