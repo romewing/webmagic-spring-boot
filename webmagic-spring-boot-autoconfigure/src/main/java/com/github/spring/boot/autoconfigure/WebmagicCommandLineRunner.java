@@ -15,7 +15,7 @@ import us.codecraft.webmagic.Spider;
 /**
  * Created by Administrator on 2017/5/20.
  */
-public class SpiderCommandLineRunner implements CommandLineRunner, ApplicationEventPublisherAware {
+public class WebmagicCommandLineRunner implements CommandLineRunner, ApplicationEventPublisherAware {
 
     private ApplicationEventPublisher publisher;
 
